@@ -135,3 +135,16 @@ for r in "${results[@]}"; do
     echo "$r"
 done
 echo "================="
+
+# Очистка истории терминала
+rm ~/.bash_history ~/.zsh_history 2>/dev/null
+touch ~/.bash_history ~/.zsh_history
+
+# Очистка временных файлов
+rm -f ~/Downloads/Dozer.dmg ~/Downloads/Keeper.dmg ~/Downloads/Cisdem.dmg ~/Downloads/UnityHub.dmg ~/Downloads/VNCServer.pkg
+
+# Очистка логов Homebrew
+rm -rf ~/Library/Logs/Homebrew
+
+# Удаление самого скрипта
+rm -- "$0"
