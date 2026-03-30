@@ -48,6 +48,43 @@ step "Перемещение Dozer" '[ -d "/Applications/Dozer.app" ] && mv -f "
 # Создание файлов
 step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt ~/Desktop/AppCryptSitesList.txt'
 
+# Создание файла со списками ALLOW/BLOCK для Cisdem AppCrypt
+step "Создание списка сайтов для AppCrypt" 'cat > ~/Downloads/AppCryptSitesList.txt << "EOF"
+ALLOW
+google.com
+dropbox.com
+apple.com
+app-privacy-policy-generator.firebaseapp.com
+aws.amazon.com
+fex.net
+online-video-cutter.com
+appicon.co
+youtube.com
+digitalocean.com
+dropmefiles.com
+apps.admob.com
+googleapis.com
+Applovin.com
+Chrome://downloads
+flycricket.com
+flycricket.io
+fex.net
+
+BLOCK
+https://appleid.apple.com
+https://accounts.google.com/ServiceLogin/identifier
+https://myaccount.google.com
+https://accounts.google.com/SignOutOptions
+https://accounts.google.com/v3/signin
+https://ads.google.com
+pricing
+https://appstoreconnect.apple.com/access/users
+https://appstoreconnect.apple.com/business
+https://appstoreconnect.apple.com/itc/payments_and_financial_reports#/
+https://appstoreconnect.apple.com/trends
+https://appstoreconnect.apple.com/analytics/apps/d30
+EOF'
+
 # Отключение сна
 step "Отключение сна" 'run_sudo pmset -a disablesleep 1'
 
