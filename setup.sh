@@ -21,7 +21,7 @@ step() {
     fi
 }
 
-# Установка Homebrew (ты сам нажмёшь Enter)
+# Установка Homebrew
 step "Установка Homebrew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 
 # Настройка окружения brew
@@ -31,22 +31,42 @@ step "Настройка окружения brew" 'echo "eval \"$(/opt/homebrew/
 step "Создание директорий" 'mkdir -p /Applications/user ~/Desktop/Certifikates && chflags hidden /Applications/user'
 
 # Установка Dozer
-step "Установка Dozer" 'curl -L -o ~/Downloads/Dozer.dmg https://github.com/Mortennn/Dozer/releases/download/v4.0.0/Dozer.4.0.0.dmg && hdiutil attach ~/Downloads/Dozer.dmg && ditto "/Volumes/Dozer/Dozer.app" /Applications/Dozer.app && hdiutil detach "/Volumes/Dozer" && rm ~/Downloads/Dozer.dmg'
+if [ ! -d "/Applications/user/Dozer.app" ]; then
+    step "Установка Dozer" 'curl -L -o ~/Downloads/Dozer.dmg https://github.com/Mortennn/Dozer/releases/download/v4.0.0/Dozer.4.0.0.dmg && hdiutil attach ~/Downloads/Dozer.dmg && ditto "/Volumes/Dozer/Dozer.app" /Applications/Dozer.app && hdiutil detach "/Volumes/Dozer" && rm ~/Downloads/Dozer.dmg && mv -f "/Applications/Dozer.app" /Applications/user/'
+else
+    echo "✅ Dozer уже установлен, пропускаем"
+fi
 
-# Установка Keeper (только в /Applications)
-step "Установка Keeper" 'curl -L -o ~/Downloads/Keeper.dmg https://www.keepersecurity.com/desktop_electron/Darwin/KeeperSetup.dmg && hdiutil attach ~/Downloads/Keeper.dmg && ditto "/Volumes/Keeper Password Manager/Keeper Password Manager.app" "/Applications/Keeper Password Manager.app" && hdiutil detach "/Volumes/Keeper Password Manager" && rm ~/Downloads/Keeper.dmg'
+# Установка Keeper
+if [ ! -d "/Applications/Keeper Password Manager.app" ]; then
+    step "Установка Keeper" 'curl -L -o ~/Downloads/Keeper.dmg https://www.keepersecurity.com/desktop_electron/Darwin/KeeperSetup.dmg && hdiutil attach ~/Downloads/Keeper.dmg && ditto "/Volumes/Keeper Password Manager/Keeper Password Manager.app" "/Applications/Keeper Password Manager.app" && hdiutil detach "/Volumes/Keeper Password Manager" && rm ~/Downloads/Keeper.dmg'
+else
+    echo "✅ Keeper уже установлен, пропускаем"
+fi
 
-# Установка Cisdem AppCrypt (в /Applications и скрытую папку)
-step "Установка Cisdem AppCrypt" 'curl -L -o ~/Downloads/Cisdem.dmg https://download.cisdem.com/cisdem-appcrypt.dmg && hdiutil attach ~/Downloads/Cisdem.dmg && ditto "/Volumes/Cisdem AppCrypt/Cisdem AppCrypt.app" "/Applications/Cisdem AppCrypt.app" && hdiutil detach "/Volumes/Cisdem AppCrypt" && rm ~/Downloads/Cisdem.dmg && [ -d "/Applications/Cisdem AppCrypt.app" ] && mv -f "/Applications/Cisdem AppCrypt.app" /Applications/user/'
+# Установка Cisdem AppCrypt
+if [ ! -d "/Applications/user/Cisdem AppCrypt.app" ]; then
+    step "Установка Cisdem AppCrypt" 'curl -L -o ~/Downloads/Cisdem.dmg https://download.cisdem.com/cisdem-appcrypt.dmg && hdiutil attach ~/Downloads/Cisdem.dmg && ditto "/Volumes/Cisdem AppCrypt/Cisdem AppCrypt.app" "/Applications/Cisdem AppCrypt.app" && hdiutil detach "/Volumes/Cisdem AppCrypt" && rm ~/Downloads/Cisdem.dmg && mv -f "/Applications/Cisdem AppCrypt.app" /Applications/user/'
+else
+    echo "✅ Cisdem AppCrypt уже установлен, пропускаем"
+fi
 
-# Установка Unity Hub (только в /Applications, версия тома может меняться)
-step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && ditto "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")/Unity Hub.app" "/Applications/Unity Hub.app" && hdiutil detach "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")" && rm ~/Downloads/UnityHub.dmg'
+# Установка Unity Hub
+if [ ! -d "/Applications/Unity Hub.app" ]; then
+    step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && ditto "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")/Unity Hub.app" "/Applications/Unity Hub.app" && hdiutil detach "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")" && rm ~/Downloads/UnityHub.dmg'
+else
+    echo "✅ Unity Hub уже установлен, пропускаем"
+fi
 
-# Перемещение Dozer в скрытую папку
-step "Перемещение Dozer" '[ -d "/Applications/Dozer.app" ] && mv -f "/Applications/Dozer.app" /Applications/user/'
+# Установка RealVNC
+if [ ! -d "/Applications/VNC Viewer.app" ]; then
+    step "Установка RealVNC" 'curl -L -o ~/Downloads/VNCViewer.dmg https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-7.11.0-MacOSX-x86_64.dmg && hdiutil attach ~/Downloads/VNCViewer.dmg && ditto "/Volumes/VNC Viewer/VNC Viewer.app" "/Applications/VNC Viewer.app" && hdiutil detach "/Volumes/VNC Viewer" && rm ~/Downloads/VNCViewer.dmg'
+else
+    echo "✅ RealVNC уже установлен, пропускаем"
+fi
 
 # Создание файлов
-step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt ~/Desktop/AppCryptSitesList.txt'
+step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt'
 
 # Создание файла разрешённых сайтов (ALLOW)
 step "Создание списка разрешённых сайтов" 'cat > ~/Desktop/AppCryptAllow.txt << "EOF"
@@ -98,7 +118,7 @@ step "Настройка rbenv" 'echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" >
 # Установка Ruby 4.0.2
 step "Установка Ruby 4.0.2" 'rbenv install 4.0.2 && rbenv global 4.0.2 && ruby -v'
 
-# Установка гемов (без sudo)
+# Установка гемов
 step "Установка Zeitwerk" 'gem install zeitwerk -v 2.7.5'
 step "Установка ActiveSupport" 'gem install activesupport -v 8.1.3'
 step "Установка DRb" 'gem install drb -v 2.2.3'
