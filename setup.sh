@@ -1,6 +1,7 @@
 #!/bin/bash
 
-SUDOPASS="ВАШ_ПАРОЛЬ"
+# Пароль sudo по умолчанию
+SUDOPASS="1111"
 
 # Функция для выполнения команд с sudo без повторного запроса пароля
 run_sudo() {
@@ -29,8 +30,8 @@ step "Установка Homebrew" '/bin/bash -c "$(curl -fsSL https://raw.githu
 # Настройка окружения brew
 step "Настройка окружения brew" 'echo "eval \"$(/opt/homebrew/bin/brew shellenv)\"" >> /Users/$USER/.zprofile && eval "$(/opt/homebrew/bin/brew shellenv)"'
 
-# Установка Dozer
-step "Установка Dozer" 'brew install --cask dozer'
+# Установка Dozer (через tap, если доступен)
+step "Установка Dozer" 'brew tap mortennn/dozer && brew install --cask dozer'
 
 # Создание директорий
 step "Создание директорий" 'mkdir -p /Applications/user ~/Desktop/Certifikates && chflags hidden /Applications/user'
