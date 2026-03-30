@@ -58,11 +58,13 @@ else
     echo "✅ Unity Hub уже установлен, пропускаем"
 fi
 
-# Установка RealVNC
-if [ ! -d "/Applications/VNC Viewer.app" ]; then
-    step "Установка RealVNC" 'curl -L -o ~/Downloads/VNCViewer.dmg https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-7.11.0-MacOSX-x86_64.dmg && hdiutil attach ~/Downloads/VNCViewer.dmg && ditto "/Volumes/VNC Viewer/VNC Viewer.app" "/Applications/VNC Viewer.app" && hdiutil detach "/Volumes/VNC Viewer" && rm ~/Downloads/VNCViewer.dmg'
+# Установка RealVNC Server (только в /Applications)
+if [ ! -d "/Applications/VNC Server.app" ]; then
+    step "Установка RealVNC Server" 'curl -L -o ~/Downloads/VNCServer.pkg https://www.realvnc.com/download/file/vnc.files/VNC-Server-7.16.0-MacOSX-universal.pkg && \
+    sudo installer -pkg ~/Downloads/VNCServer.pkg -target / && \
+    rm ~/Downloads/VNCServer.pkg'
 else
-    echo "✅ RealVNC уже установлен, пропускаем"
+    echo "✅ RealVNC Server уже установлен, пропускаем"
 fi
 
 # Создание файлов
