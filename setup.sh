@@ -31,13 +31,13 @@ step "Настройка окружения brew" 'echo "eval \"$(/opt/homebrew/
 step "Установка Dozer" 'curl -L -o ~/Downloads/Dozer.dmg https://github.com/Mortennn/Dozer/releases/download/v4.0.0/Dozer.4.0.0.dmg && hdiutil attach ~/Downloads/Dozer.dmg && cp -r /Volumes/Dozer/Dozer.app /Applications && hdiutil detach /Volumes/Dozer && rm ~/Downloads/Dozer.dmg'
 
 # Установка Keeper
-step "Установка Keeper" 'curl -L -o ~/Downloads/Keeper.dmg https://www.keepersecurity.com/desktop_electron/Darwin/KeeperSetup.dmg && hdiutil attach ~/Downloads/Keeper.dmg && cp -r /Volumes/Keeper/Keeper.app /Applications && hdiutil detach /Volumes/Keeper && rm ~/Downloads/Keeper.dmg'
+step "Установка Keeper" 'curl -L -o ~/Downloads/Keeper.dmg https://www.keepersecurity.com/desktop_electron/Darwin/KeeperSetup.dmg && hdiutil attach ~/Downloads/Keeper.dmg && cp -r "/Volumes/Keeper Password Manager/Keeper Password Manager.app" /Applications && hdiutil detach "/Volumes/Keeper Password Manager" && rm ~/Downloads/Keeper.dmg'
 
 # Установка Cisdem AppCrypt
-step "Установка Cisdem AppCrypt" 'curl -L -o ~/Downloads/Cisdem.dmg https://download.cisdem.com/cisdem-appcrypt.dmg && hdiutil attach ~/Downloads/Cisdem.dmg && cp -r /Volumes/AppCrypt/Cisdem\ AppCrypt.app /Applications && hdiutil detach /Volumes/AppCrypt && rm ~/Downloads/Cisdem.dmg'
+step "Установка Cisdem AppCrypt" 'curl -L -o ~/Downloads/Cisdem.dmg https://download.cisdem.com/cisdem-appcrypt.dmg && hdiutil attach ~/Downloads/Cisdem.dmg && cp -r "/Volumes/Cisdem AppCrypt/Cisdem AppCrypt.app" /Applications && hdiutil detach "/Volumes/Cisdem AppCrypt" && rm ~/Downloads/Cisdem.dmg'
 
 # Установка Unity Hub
-step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && cp -r /Volumes/Unity\ Hub/Unity\ Hub.app /Applications && hdiutil detach /Volumes/Unity\ Hub && rm ~/Downloads/UnityHub.dmg'
+step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && cp -r "/Volumes/Unity Hub 3.11.1/Unity Hub.app" /Applications && hdiutil detach "/Volumes/Unity Hub 3.11.1" && rm ~/Downloads/UnityHub.dmg'
 
 # Создание директорий
 step "Создание директорий" 'mkdir -p /Applications/user ~/Desktop/Certifikates && chflags hidden /Applications/user'
