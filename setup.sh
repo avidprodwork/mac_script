@@ -1,14 +1,11 @@
 #!/bin/bash
 
-# Пароль sudo по умолчанию
 SUDOPASS="1111"
 
-# Функция для выполнения команд с sudo без повторного запроса пароля
 run_sudo() {
     echo "$SUDOPASS" | sudo -S "$@"
 }
 
-# Массив строк для отчёта
 results=()
 
 step() {
@@ -24,8 +21,8 @@ step() {
     fi
 }
 
-# Установка Homebrew (автоматический Enter)
-step "Установка Homebrew" 'printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+# Установка Homebrew (ты сам нажмёшь Enter при запуске)
+step "Установка Homebrew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 
 # Настройка окружения brew
 step "Настройка окружения brew" 'echo "eval \"$(/opt/homebrew/bin/brew shellenv)\"" >> /Users/$USER/.zprofile && eval "$(/opt/homebrew/bin/brew shellenv)"'
@@ -36,8 +33,8 @@ step "Установка Dozer" 'curl -L -o ~/Downloads/Dozer.dmg https://github
 # Создание директорий
 step "Создание директорий" 'mkdir -p /Applications/user ~/Desktop/Certifikates && chflags hidden /Applications/user'
 
-# Перемещение приложений
-step "Перемещение приложений" 'mv /Applications/Dozer.app /Applications/user 2>/dev/null; mv /Applications/Cisdem\ AppCrypt.app /Applications/user 2>/dev/null'
+# Перемещение приложений (с проверкой)
+step "Перемещение приложений" '[ -d "/Applications/Dozer.app" ] && mv /Applications/Dozer.app /Applications/user; [ -d "/Applications/Cisdem AppCrypt.app" ] && mv "/Applications/Cisdem AppCrypt.app" /Applications/user'
 
 # Создание файлов
 step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt ~/Desktop/AppCryptSitesList.txt'
@@ -48,17 +45,17 @@ step "Отключение сна" 'run_sudo pmset -a disablesleep 1'
 # Установка пакетов
 step "Установка пакетов" 'brew install blueutil cocoapods rbenv && blueutil --power 0'
 
-# Настройка rbenv
+# Настройка rbenv (исправлено)
 step "Настройка rbenv" 'echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" >> ~/.bash_profile && echo "eval \"$(rbenv init -)\"" >> ~/.bash_profile && source ~/.bash_profile'
 
 # Установка Ruby 4.0.2
 step "Установка Ruby 4.0.2" 'rbenv install 4.0.2 && rbenv global 4.0.2 && ruby -v'
 
-# Установка гемов (без sudo, чтобы ставились в ~/.rbenv)
+# Установка гемов (без sudo)
 step "Установка Zeitwerk" 'gem install zeitwerk -v 2.7.5'
 step "Установка ActiveSupport" 'gem install activesupport -v 8.1.3'
 step "Установка DRb" 'gem install drb -v 2.2.3'
-step "Установка CocoaPods" 'gem install cocoapods'
+step "Установка CocoaPods" 'gem install cocoapods -v 1.16.2'
 
 # Очистка истории zsh
 step "Очистка истории zsh" 'rm ~/.zsh_history && touch ~/.zsh_history'
