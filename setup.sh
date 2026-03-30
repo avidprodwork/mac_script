@@ -36,8 +36,8 @@ step "Установка Keeper" 'curl -L -o ~/Downloads/Keeper.dmg https://www.
 # Установка Cisdem AppCrypt
 step "Установка Cisdem AppCrypt" 'curl -L -o ~/Downloads/Cisdem.dmg https://download.cisdem.com/cisdem-appcrypt.dmg && hdiutil attach ~/Downloads/Cisdem.dmg && cp -r "/Volumes/Cisdem AppCrypt/Cisdem AppCrypt.app" /Applications && hdiutil detach "/Volumes/Cisdem AppCrypt" && rm ~/Downloads/Cisdem.dmg'
 
-# Установка Unity Hub
-step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && cp -r "/Volumes/Unity Hub 3.11.1/Unity Hub.app" /Applications && hdiutil detach "/Volumes/Unity Hub 3.11.1" && rm ~/Downloads/UnityHub.dmg'
+# Установка Unity Hub (версия может меняться, поэтому лучше искать автоматически)
+step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && cp -r "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")/Unity Hub.app" /Applications && hdiutil detach "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")" && rm ~/Downloads/UnityHub.dmg'
 
 # Создание директорий
 step "Создание директорий" 'mkdir -p /Applications/user ~/Desktop/Certifikates && chflags hidden /Applications/user'
