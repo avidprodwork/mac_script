@@ -24,12 +24,13 @@ bash <(curl -fsSL https://raw.githubusercontent.com/avidprodwork/mac_script/main
 - 🔒 Отключает сон системы (pmset disablesleep).
 - 🧹 Очищает историю zsh.
 
+
+
 🧹 Очистка окружения
 Запусти скрипт удаления:
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/avidprodwork/mac_script/main/remove.sh)
 ```
-
 Что делает remove.sh:
 - ❌ Удаляет все установленные приложения (Dozer, Keeper, Cisdem AppCrypt, Unity Hub, RealVNC Server).
 - 🗑️ Сносит скрытую папку /Applications/user.
