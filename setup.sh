@@ -48,9 +48,8 @@ step "Перемещение Dozer" '[ -d "/Applications/Dozer.app" ] && mv -f "
 # Создание файлов
 step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt ~/Desktop/AppCryptSitesList.txt'
 
-# Создание файла со списками ALLOW/BLOCK для Cisdem AppCrypt
-step "Создание списка сайтов для AppCrypt" 'cat > ~/Downloads/AppCryptSitesList.txt << "EOF"
-ALLOW
+# Создание файла разрешённых сайтов (ALLOW)
+step "Создание списка разрешённых сайтов" 'cat > ~/Downloads/AppCryptAllow.txt << "EOF"
 google.com
 dropbox.com
 apple.com
@@ -69,8 +68,10 @@ Chrome://downloads
 flycricket.com
 flycricket.io
 fex.net
+EOF'
 
-BLOCK
+# Создание файла заблокированных сайтов (BLOCK)
+step "Создание списка заблокированных сайтов" 'cat > ~/Downloads/AppCryptBlock.txt << "EOF"
 https://appleid.apple.com
 https://accounts.google.com/ServiceLogin/identifier
 https://myaccount.google.com
