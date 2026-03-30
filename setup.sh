@@ -7,17 +7,19 @@ run_sudo() {
     echo "$SUDOPASS" | sudo -S "$@"
 }
 
-# Массив для логов
-declare -A results
+# Массив строк для отчёта
+results=()
 
 step() {
-    echo ">>> $1..."
-    if eval "$2"; then
-        echo "✔ Успешно: $1"
-        results["$1"]="Успешно"
+    local name="$1"
+    local cmd="$2"
+    echo ">>> $name..."
+    if eval "$cmd"; then
+        echo "✅ Успешно: $name"
+        results+=("✅ $name")
     else
-        echo "✘ Ошибка: $1"
-        results["$1"]="Ошибка"
+        echo "❌ Ошибка: $name"
+        results+=("❌ $name")
     fi
 }
 
@@ -60,7 +62,7 @@ step "Очистка истории zsh" 'rm ~/.zsh_history && touch ~/.zsh_hist
 
 # Итоговый отчёт
 echo -e "\n===== ОТЧЁТ ====="
-for key in "${!results[@]}"; do
-    echo "$key: ${results[$key]}"
+for r in "${results[@]}"; do
+    echo "$r"
 done
 echo "================="
