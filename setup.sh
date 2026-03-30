@@ -108,8 +108,8 @@ https://appstoreconnect.apple.com/trends
 https://appstoreconnect.apple.com/analytics/apps/d30
 EOF'
 
-# Отключение сна
-step "Отключение сна" 'run_sudo pmset -a disablesleep 1'
+# Настройка энергосбережения и сна
+step "Отключение сна и выключения дисплея" 'run_sudo pmset -b displaysleep 0 && run_sudo pmset -c displaysleep 0 && run_sudo pmset -a sleep 0 && run_sudo pmset -a disablesleep 1'
 
 # Установка пакетов
 step "Установка пакетов" 'brew install blueutil cocoapods rbenv && blueutil --power 0'
