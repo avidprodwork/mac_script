@@ -27,23 +27,23 @@ step "Установка Homebrew" '/bin/bash -c "$(curl -fsSL https://raw.githu
 # Настройка окружения brew
 step "Настройка окружения brew" 'echo "eval \"$(/opt/homebrew/bin/brew shellenv)\"" >> /Users/$USER/.zprofile && eval "$(/opt/homebrew/bin/brew shellenv)"'
 
-# Установка Dozer
-step "Установка Dozer" 'curl -L -o ~/Downloads/Dozer.dmg https://github.com/Mortennn/Dozer/releases/download/v4.0.0/Dozer.4.0.0.dmg && hdiutil attach ~/Downloads/Dozer.dmg && cp -r /Volumes/Dozer/Dozer.app /Applications && hdiutil detach /Volumes/Dozer && rm ~/Downloads/Dozer.dmg'
-
-# Установка Keeper
-step "Установка Keeper" 'curl -L -o ~/Downloads/Keeper.dmg https://www.keepersecurity.com/desktop_electron/Darwin/KeeperSetup.dmg && hdiutil attach ~/Downloads/Keeper.dmg && cp -r "/Volumes/Keeper Password Manager/Keeper Password Manager.app" /Applications && hdiutil detach "/Volumes/Keeper Password Manager" && rm ~/Downloads/Keeper.dmg'
-
-# Установка Cisdem AppCrypt
-step "Установка Cisdem AppCrypt" 'curl -L -o ~/Downloads/Cisdem.dmg https://download.cisdem.com/cisdem-appcrypt.dmg && hdiutil attach ~/Downloads/Cisdem.dmg && cp -r "/Volumes/Cisdem AppCrypt/Cisdem AppCrypt.app" /Applications && hdiutil detach "/Volumes/Cisdem AppCrypt" && rm ~/Downloads/Cisdem.dmg'
-
-# Установка Unity Hub (версия может меняться, поэтому лучше искать автоматически)
-step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && cp -r "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")/Unity Hub.app" /Applications && hdiutil detach "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")" && rm ~/Downloads/UnityHub.dmg'
-
 # Создание директорий
 step "Создание директорий" 'mkdir -p /Applications/user ~/Desktop/Certifikates && chflags hidden /Applications/user'
 
-# Перемещение приложений (с проверкой)
-step "Перемещение приложений" '[ -d "/Applications/Dozer.app" ] && mv -f /Applications/Dozer.app /Applications/user; [ -d "/Applications/Cisdem AppCrypt.app" ] && mv -f "/Applications/Cisdem AppCrypt.app" /Applications/user; [ -d "/Applications/Keeper.app" ] && mv -f "/Applications/Keeper.app" /Applications/user; [ -d "/Applications/Unity Hub.app" ] && mv -f "/Applications/Unity Hub.app" /Applications/user'
+# Установка Dozer
+step "Установка Dozer" 'curl -L -o ~/Downloads/Dozer.dmg https://github.com/Mortennn/Dozer/releases/download/v4.0.0/Dozer.4.0.0.dmg && hdiutil attach ~/Downloads/Dozer.dmg && ditto "/Volumes/Dozer/Dozer.app" /Applications/Dozer.app && hdiutil detach "/Volumes/Dozer" && rm ~/Downloads/Dozer.dmg'
+
+# Установка Keeper (только в /Applications)
+step "Установка Keeper" 'curl -L -o ~/Downloads/Keeper.dmg https://www.keepersecurity.com/desktop_electron/Darwin/KeeperSetup.dmg && hdiutil attach ~/Downloads/Keeper.dmg && ditto "/Volumes/Keeper Password Manager/Keeper Password Manager.app" "/Applications/Keeper Password Manager.app" && hdiutil detach "/Volumes/Keeper Password Manager" && rm ~/Downloads/Keeper.dmg'
+
+# Установка Cisdem AppCrypt (в /Applications и скрытую папку)
+step "Установка Cisdem AppCrypt" 'curl -L -o ~/Downloads/Cisdem.dmg https://download.cisdem.com/cisdem-appcrypt.dmg && hdiutil attach ~/Downloads/Cisdem.dmg && ditto "/Volumes/Cisdem AppCrypt/Cisdem AppCrypt.app" "/Applications/Cisdem AppCrypt.app" && hdiutil detach "/Volumes/Cisdem AppCrypt" && rm ~/Downloads/Cisdem.dmg && [ -d "/Applications/Cisdem AppCrypt.app" ] && mv -f "/Applications/Cisdem AppCrypt.app" /Applications/user/'
+
+# Установка Unity Hub (только в /Applications, версия тома может меняться)
+step "Установка Unity Hub" 'curl -L -o ~/Downloads/UnityHub.dmg https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.dmg && hdiutil attach ~/Downloads/UnityHub.dmg && ditto "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")/Unity Hub.app" "/Applications/Unity Hub.app" && hdiutil detach "$(find /Volumes -maxdepth 1 -type d -name "Unity Hub*")" && rm ~/Downloads/UnityHub.dmg'
+
+# Перемещение Dozer в скрытую папку
+step "Перемещение Dozer" '[ -d "/Applications/Dozer.app" ] && mv -f "/Applications/Dozer.app" /Applications/user/'
 
 # Создание файлов
 step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt ~/Desktop/AppCryptSitesList.txt'
