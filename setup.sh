@@ -60,7 +60,7 @@ fi
 
 # Установка RealVNC Server (только в /Applications)
 if [ ! -d "/Applications/VNC Server.app" ]; then
-    step "Установка RealVNC Server" 'curl -L -o ~/Downloads/VNCServer.pkg https://www.realvnc.com/download/file/vnc.files/VNC-Server-7.16.0-MacOSX-universal.pkg && \
+    step "Установка RealVNC Server" 'curl -L -o ~/Downloads/VNCServer.pkg https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.16.0-MacOSX-universal.pkg && \
     sudo installer -pkg ~/Downloads/VNCServer.pkg -target / && \
     rm ~/Downloads/VNCServer.pkg'
 else
