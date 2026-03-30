@@ -49,7 +49,7 @@ step "Перемещение Dozer" '[ -d "/Applications/Dozer.app" ] && mv -f "
 step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt ~/Desktop/AppCryptSitesList.txt'
 
 # Создание файла разрешённых сайтов (ALLOW)
-step "Создание списка разрешённых сайтов" 'cat > ~/Downloads/AppCryptAllow.txt << "EOF"
+step "Создание списка разрешённых сайтов" 'cat > ~/Desktop/AppCryptAllow.txt << "EOF"
 google.com
 dropbox.com
 apple.com
@@ -71,7 +71,7 @@ fex.net
 EOF'
 
 # Создание файла заблокированных сайтов (BLOCK)
-step "Создание списка заблокированных сайтов" 'cat > ~/Downloads/AppCryptBlock.txt << "EOF"
+step "Создание списка заблокированных сайтов" 'cat > ~/Desktop/AppCryptBlock.txt << "EOF"
 https://appleid.apple.com
 https://accounts.google.com/ServiceLogin/identifier
 https://myaccount.google.com
