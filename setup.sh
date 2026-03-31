@@ -74,8 +74,8 @@ step "Добавление Dozer в автозапуск" 'osascript -e '\''tell
 
 step "Добавление Cisdem AppCrypt в автозапуск" 'osascript -e '\''tell application "System Events" to make login item at end with properties {name:"Cisdem AppCrypt", path:"/Applications/user/Cisdem AppCrypt.app", hidden:false}'\'''
 
-# Создание файлов
-step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt'
+## Создание файлов
+#step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt'
 
 # Создание файла разрешённых сайтов (ALLOW)
 step "Создание списка разрешённых сайтов" 'cat > ~/Desktop/AppCryptAllow.txt << "EOF"
@@ -151,7 +151,7 @@ rm ~/.bash_history ~/.zsh_history 2>/dev/null
 touch ~/.bash_history ~/.zsh_history
 
 # Очистка временных файлов
-rm -f ~/Downloads/Dozer.dmg ~/Downloads/Keeper.dmg ~/Downloads/Cisdem.dmg ~/Downloads/UnityHub.dmg ~/Downloads/VNCServer.pkg
+rm -f ~/Downloads/Dozer.dmg ~/Downloads/Keeper.dmg ~/Downloads/Cisdem.dmg ~/Downloads/UnityHub.dmg #~/Downloads/VNCServer.pkg
 
 # Очистка логов Homebrew
 rm -rf ~/Library/Logs/Homebrew
