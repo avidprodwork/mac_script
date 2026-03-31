@@ -36,6 +36,17 @@ step "Удаление Unity Hub" 'rm -rf "/Applications/Unity Hub.app"'
 # Удаление RealVNC Server
 step "Удаление RealVNC Server" 'rm -rf "/Applications/VNC Server.app" && run_sudo pkgutil --forget com.realvnc.vncserver'
 
+# Включение системного звука обратно (если setup его отключал):
+step "Включение системного звука" 'osascript -e "set volume output muted false"'
+
+# Сброс параметров энергосбережения и сна
+step "Сброс настроек сна" 'run_sudo pmset restoredefaults'
+
+# Удаление из автозагрузки (Login Items)
+step "Удаление AnyDesk из автозагрузки" 'osascript -e '\''tell application "System Events" to delete login item "AnyDesk"'\'''
+step "Удаление Dozer из автозагрузки" 'osascript -e '\''tell application "System Events" to delete login item "Dozer"'\'''
+step "Удаление Cisdem AppCrypt из автозагрузки" 'osascript -e '\''tell application "System Events" to delete login item "Cisdem AppCrypt"'\'''
+
 # Удаление директорий
 step "Удаление директорий" 'rm -rf ~/Desktop/Certifikates /Applications/user'
 
