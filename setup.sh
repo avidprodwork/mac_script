@@ -58,14 +58,14 @@ else
     echo "✅ Unity Hub уже установлен, пропускаем"
 fi
 
-# Установка RealVNC Server (только в /Applications)
-if [ ! -d "/Applications/VNC Server.app" ]; then
-    step "Установка RealVNC Server" 'curl -L -o ~/Downloads/VNCServer.pkg https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.16.0-MacOSX-universal.pkg && \
-    run_sudo installer -pkg ~/Downloads/VNCServer.pkg -target / && \
-    rm ~/Downloads/VNCServer.pkg'
-else
-    echo "✅ RealVNC Server уже установлен, пропускаем"
-fi
+## Установка RealVNC Server (только в /Applications)
+#if [ ! -d "/Applications/VNC Server.app" ]; then
+#    step "Установка RealVNC Server" 'curl -L -o ~/Downloads/VNCServer.pkg https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.16.0-MacOSX-universal.pkg && \
+#    run_sudo installer -pkg ~/Downloads/VNCServer.pkg -target / && \
+#    rm ~/Downloads/VNCServer.pkg'
+#else
+#    echo "✅ RealVNC Server уже установлен, пропускаем"
+#fi
 
 # Добавление приложений в автозапуск (Login Items)
 step "Добавление AnyDesk в автозапуск" 'osascript -e '\''tell application "System Events" to make login item at end with properties {name:"AnyDesk", path:"/Applications/AnyDesk.app", hidden:false}'\'''
