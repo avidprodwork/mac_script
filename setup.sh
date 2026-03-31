@@ -67,6 +67,13 @@ else
     echo "✅ RealVNC Server уже установлен, пропускаем"
 fi
 
+# Добавление приложений в автозапуск (Login Items)
+step "Добавление AnyDesk в автозапуск" 'osascript -e '\''tell application "System Events" to make login item at end with properties {name:"AnyDesk", path:"/Applications/AnyDesk.app", hidden:false}'\'''
+
+step "Добавление Dozer в автозапуск" 'osascript -e '\''tell application "System Events" to make login item at end with properties {name:"Dozer", path:"/Applications/user/Dozer.app", hidden:false}'\'''
+
+step "Добавление Cisdem AppCrypt в автозапуск" 'osascript -e '\''tell application "System Events" to make login item at end with properties {name:"Cisdem AppCrypt", path:"/Applications/user/Cisdem AppCrypt.app", hidden:false}'\'''
+
 # Создание файлов
 step "Создание файлов" 'touch ~/Desktop/Certifikates/SharedSecret.txt'
 
