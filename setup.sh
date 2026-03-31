@@ -115,6 +115,9 @@ https://appstoreconnect.apple.com/trends
 https://appstoreconnect.apple.com/analytics/apps/d30
 EOF'
 
+# Отключение системного звука
+step "Отключение системного звука" 'osascript -e "set volume output muted true"'
+
 # Настройка энергосбережения и сна
 step "Отключение сна и выключения дисплея" 'run_sudo pmset -b displaysleep 0 && run_sudo pmset -c displaysleep 0 && run_sudo pmset -a sleep 0 && run_sudo pmset -a disablesleep 1'
 
