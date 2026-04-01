@@ -124,8 +124,8 @@ step "Отключение сна и выключения дисплея" 'run_s
 # Установка пакетов
 step "Установка пакетов" 'brew install blueutil cocoapods rbenv && blueutil --power 0'
 
-## Настройка rbenv
-#step "Настройка rbenv" 'echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" >> ~/.bash_profile && echo "eval \"$(rbenv init -)\"" >> ~/.bash_profile && source ~/.bash_profile'
+# Настройка rbenv
+step "Настройка rbenv" 'echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" >> ~/.bash_profile && echo "eval \"$(rbenv init -)\"" >> ~/.bash_profile && source ~/.bash_profile'
 
 # Установка Ruby 4.0.2
 step "Установка Ruby 4.0.2" 'rbenv install 4.0.2 && rbenv global 4.0.2 && ruby -v'
